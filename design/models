@@ -1,0 +1,13 @@
+[pollutants]
+name: string
+param_id: integer
+
+[areas]
+
+[sites]
+
+
+area: string
+site: string 
+
+
