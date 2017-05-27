@@ -84,8 +84,8 @@ class Updater
 				areas.push(current_table[i][col])
 			end
 		end
-	  return areas if areas.uniq! == nil
-		return areas.uniq! 
+	  return areas if areas.uniq == nil
+		return areas.uniq
 	end
 end
 

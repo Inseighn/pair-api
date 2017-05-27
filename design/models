@@ -3,11 +3,14 @@ name: string
 param_id: integer
 
 [areas]
+desc: string
 
 [sites]
+desc: string
 
-
-area: string
-site: string 
+[pollutant_levels]
+site_id
+pollutant_id 
+timestamp
 
 
