@@ -69,14 +69,15 @@ class Updater
 	end
 
 	def get_areas
-		return get_unique_col(0)
+		current_table = create_request
+		return get_unique_col(current_table,0)
 	end
 	def get_sites
-		return get_unique_col(1)
+		current_table = create_request
+		return get_unique_col(current_table,1)
 	end
 
-	def get_unique_col(col)
-		current_table = create_request
+	def get_unique_col(current_table, col)
 		areas = []
 		puts "Retrieved table with #{current_table.count} rows."
 		current_table.each_index do |i|
@@ -86,6 +87,43 @@ class Updater
 		end
 	  return areas if areas.uniq == nil
 		return areas.uniq
+	end
+	
+	def update_sites_and_areas
+		current_table = create_request
+		areas = get_unique_col(current_table, 0)
+
+		Area.delete_all
+		areas.each do |area|
+			Area.new(desc: area).save
+		end
+		
+		Site.delete_all
+		current_table.each do |row|
+			if Area.exists?(desc: row[0])
+				area_id = Area.find_by(desc: row[0]).id
+				Site.new(desc: row[1], area_id: area_id).save
+			end
+		end
+	end
+	
+	def update_pollutants
+		Pollutant.delete_all
+		pollutants = get_pollutants
+		pollutants.each do |key, val|
+			Pollutant.new(name: val, param: key).save
+		end
+	end
+
+	def update_pollutant_values(site_id, pollutant_id)
+		if Site.exists?(site_id) 
+			current_table = create_request(pollutant_id)
+			current_table.each do |row|
+				if row[1] == Site.find(site_id).desc 
+					return row
+				end
+			end
+		end
 	end
 end
 
