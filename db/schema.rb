@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170527002715) do
+ActiveRecord::Schema.define(version: 20170527174525) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "desc"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20170527002715) do
     t.datetime "time"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "level"
     t.index ["pollutant_id"], name: "index_pollutant_levels_on_pollutant_id"
     t.index ["site_id"], name: "index_pollutant_levels_on_site_id"
   end

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 		scope '/:area' do
 			get '/' => 'site#index'
 			scope '/:site' do
+				get '/' => 'site#get_for'
 				scope ':pollutant' do
 				end
 			end

@@ -12,4 +12,7 @@ class SiteController < ApplicationController
 			render json: render_200(sites) 
 		end
 	end
+	def get_for
+		render json: Site.find(params[:site]).pollutant_levels.to_json
+	end
 end
